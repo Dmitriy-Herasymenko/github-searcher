@@ -1,3 +1,4 @@
 import './style.scss';
+import {Search} from "../search";
 
-export const GithubSearcher = () => <h1>Hello world</h1>;
+export const GithubSearcher = () => <Search />;

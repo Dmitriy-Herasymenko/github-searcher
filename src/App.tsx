@@ -1,5 +1,6 @@
 import React from 'react';
 import {GithubSearcher} from "./components/githubSearcher";
+import './App.css'
 
 function App() {
   return (
