@@ -19,6 +19,6 @@ export interface IUser {
     url: string;
 }
 
- export interface IUserCard {
+ export interface IUserList {
     items: IUser[]
 }

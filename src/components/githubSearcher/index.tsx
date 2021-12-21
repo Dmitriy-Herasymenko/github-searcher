@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {Search} from "../search";
 import {CardList} from "../cardList";
-import {UserCard} from '../userCard/index';
-import {IUser, IUserCard, IUserCardAdvance} from "../../types/User";
+import {UserCard} from '../userCard';
+import {IUser, IUserList, IUserCardAdvance} from "../../types/User";
 import {IRepo} from "../../types/Repo";
 import axios from "axios";
 import './style.scss';
@@ -16,7 +16,7 @@ export const GithubSearcher = () => {
 
     const fetchUsers = async (value: string) => {
         try {
-            const {data} = await axios.get<IUserCard>(`https://api.github.com/search/users?q=${value}`)
+            const {data} = await axios.get<IUserList>(`https://api.github.com/search/users?q=${value}`)
             setUsers(data.items)
         } catch (e: any) {
             console.log(e.message)
