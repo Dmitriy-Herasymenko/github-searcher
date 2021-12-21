@@ -1,4 +1,5 @@
-import {FC} from "react";
+import {FC, useCallback} from "react";
+import {debounce} from "../../decorator";
 import "./style.scss";
 
 interface IProps {
@@ -6,8 +7,9 @@ interface IProps {
 }
 
 export const Search: FC<IProps> = ({fetchUsers}) => {
+    const debounceOnChange = useCallback(debounce(fetchUsers, 1000), []);
 
     return (
-        <input onChange={e => fetchUsers(e.target.value)} placeholder='Search...' className='search'/>
+        <input onChange={e => debounceOnChange(e.target.value)} placeholder='Search...' className='search'/>
     )
 }
