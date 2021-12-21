@@ -1,14 +1,18 @@
 import {useState} from "react";
 import {Search} from "../search";
-import {IUser, IUserCard} from "../../Types/User";
+import {CardList} from "../cardList";
+import {UserCard} from '../userCard/index';
+import {IUser, IUserCard, IUserCardAdvance} from "../../types/User";
+import {IRepo} from "../../types/Repo";
 import axios from "axios";
 import './style.scss';
-import {CardList} from "../cardList";
 
 
 export const GithubSearcher = () => {
-    const [user, setUser] = useState<IUser>();
+    const [user, setUser] = useState<IUserCardAdvance>({});
     const [users, setUsers] = useState<IUser[]>([]);
+    const [repos, setRepos] = useState<IRepo[]>([]);
+    const [card, setCard] = useState(false)
 
     const fetchUsers = async (value: string) => {
         try {
@@ -22,16 +26,31 @@ export const GithubSearcher = () => {
         try {
             const {data} = await axios.get<IUser>(url)
             setUser(data)
+            setCard(!card)
+        } catch (e: any) {
+            console.log(e.message)
+        }
+    };
+    const fetchRepos = async (value: string) => {
+        try {
+            const {data} = await axios.get<IRepo[]>(`https://api.github.com/users/${user.login}/repos`)
+            const filterData = data.filter(rep => rep.name.toLowerCase().includes(value))
+            setRepos(filterData)
         } catch (e: any) {
             console.log(e.message)
         }
     };
 
     return (
-        <>
-            <Search fetchUsers={fetchUsers} />
-            <CardList users={users} fetchDataUser={fetchDataUser} />
-        </>
+        card ?
+            <>
+                <span onClick={() => setCard(!card)} className='iconArrow'>&#8592;</span>
+                <UserCard user={user} fetchRepos={fetchRepos} repos={repos}/>
+            </> :
+            <>
+                <Search fetchUsers={fetchUsers}/>
+                <CardList users={users} fetchDataUser={fetchDataUser}/>
+            </>
 
     )
 };

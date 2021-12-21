@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {IUser} from "../../Types/User"
+import {IUser} from "../../types/User"
 import './style.scss';
 
 interface IProps {

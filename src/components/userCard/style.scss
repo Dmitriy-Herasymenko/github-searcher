@@ -1,0 +1,55 @@
+.container {
+  margin: 150px auto;
+  width: 500px;
+  background-color: #0D1117;
+  border: 1px solid #30363d;
+
+  .user-card {
+    display: flex;
+    align-items: center;
+
+    .user-card__img {
+      width: 250px
+    }
+
+    .user-card__list {
+      color: #c9d1d9;
+      list-style-type: none;
+      margin: 0 auto;
+      padding-left: 0;
+    }
+    .user-card__description {
+      color: #c9d1d9;
+      margin-top: 20px;
+    }
+
+  }
+
+  .user-card__search {
+    padding: 15px;
+    width: 400px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    border: 1px solid #30363d
+  }
+
+  .user-card-repo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    padding: 10px;
+    margin: 25px auto;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+
+    .user-card-repo__list {
+      color: #c9d1d9;
+      list-style-type: none
+    }
+  }
+
+}
