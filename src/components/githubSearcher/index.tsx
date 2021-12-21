@@ -12,7 +12,7 @@ export const GithubSearcher = () => {
     const [user, setUser] = useState<IUserCardAdvance>({});
     const [users, setUsers] = useState<IUser[]>([]);
     const [repos, setRepos] = useState<IRepo[]>([]);
-    const [card, setCard] = useState(false)
+    const [card,  isCardSet] = useState(false)
 
     const fetchUsers = async (value: string) => {
         try {
@@ -26,7 +26,7 @@ export const GithubSearcher = () => {
         try {
             const {data} = await axios.get<IUser>(url)
             setUser(data)
-            setCard(!card)
+            isCardSet(prevCard => !prevCard)
         } catch (e: any) {
             console.log(e.message)
         }
@@ -34,8 +34,8 @@ export const GithubSearcher = () => {
     const fetchRepos = async (value: string) => {
         try {
             const {data} = await axios.get<IRepo[]>(`https://api.github.com/users/${user.login}/repos`)
-            const filterData = data.filter(rep => rep.name.toLowerCase().includes(value))
-            setRepos(filterData)
+            const filteredData = data.filter(rep => rep.name.toLowerCase().includes(value))
+            setRepos(filteredData)
         } catch (e: any) {
             console.log(e.message)
         }
@@ -44,7 +44,7 @@ export const GithubSearcher = () => {
     return (
         card ?
             <>
-                <span onClick={() => setCard(!card)} className='iconArrow'>&#8592;</span>
+                <span onClick={() => isCardSet(prevCard => !prevCard)} className='iconArrow'>&#8592;</span>
                 <UserCard user={user} fetchRepos={fetchRepos} repos={repos}/>
             </> :
             <>

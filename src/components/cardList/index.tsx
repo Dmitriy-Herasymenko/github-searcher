@@ -8,7 +8,8 @@ interface IProps {
 }
 
 export const CardList: FC<IProps> = ({users, fetchDataUser}) => {
-    if (users.length === 0 || users.length === undefined || users.length === null) return <span>No users</span>
+    const areUsersAvailable = users.length === 0 || users.length === undefined || users.length === null;
+    if (areUsersAvailable) return <span>No users</span>
     return (
         <>
             {users.map((user) => {

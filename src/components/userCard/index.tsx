@@ -1,7 +1,7 @@
 import {FC, useCallback} from "react";
 import {IUserCardAdvance} from "../../types/User";
 import {IRepo} from "../../types/Repo";
-import {debounce} from "../../decorator";
+import {debounce} from "../../utils";
 import './style.scss';
 
 interface IProps {
