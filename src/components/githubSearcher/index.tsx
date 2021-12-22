@@ -5,7 +5,7 @@ import axios, {AxiosError} from "axios";
 import './style.scss';
 
 export const GithubSearcher = () => {
-    const [user, setUser] = useState<IUserCard>({});
+    const [user, setUser] = useState({} as IUserCard);
     const [users, setUsers] = useState<IUser[]>([]);
     const [repos, setRepos] = useState<IRepo[]>([]);
     const [card, isCardSet] = useState(false);
@@ -22,7 +22,7 @@ export const GithubSearcher = () => {
     const fetchDataUser = async (url: string) => {
 
         try {
-            const {data} = await axios.get<IUser>(url)
+            const {data} = await axios.get<IUserCard>(url)
             setUser(data)
             isCardSet(prevCard => !prevCard)
         } catch (e) {
