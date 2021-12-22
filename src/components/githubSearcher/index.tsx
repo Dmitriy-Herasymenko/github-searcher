@@ -1,10 +1,6 @@
 import {useState} from "react";
-import {Search} from "../search";
-import {CardList} from "../cardList";
-import {UserCard} from '../userCard';
-import {IUser, IUserList} from "../../types/user";
-import {IUserCard} from "../../types/userCard";
-import {IRepo} from "../../types/repo";
+import {CardList, UserCard, Search} from "../index";
+import {IUser, IUserList, IUserCard, IRepo} from "../../types/";
 import axios from "axios";
 import './style.scss';
 
