@@ -2,14 +2,16 @@ import {useState} from "react";
 import {Search} from "../search";
 import {CardList} from "../cardList";
 import {UserCard} from '../userCard';
-import {IUser, IUserList, IUserCardAdvance} from "../../types/User";
-import {IRepo} from "../../types/Repo";
+import {IUser, IUserList} from "../../types/user";
+import {IUserCard} from "../../types/userCard";
+import {IRepo} from "../../types/repo";
 import axios from "axios";
 import './style.scss';
 
 
+
 export const GithubSearcher = () => {
-    const [user, setUser] = useState<IUserCardAdvance>({});
+    const [user, setUser] = useState<IUserCard>({});
     const [users, setUsers] = useState<IUser[]>([]);
     const [repos, setRepos] = useState<IRepo[]>([]);
     const [card,  isCardSet] = useState(false)
@@ -23,6 +25,7 @@ export const GithubSearcher = () => {
         }
     };
     const fetchDataUser = async (url: string) => {
+
         try {
             const {data} = await axios.get<IUser>(url)
             setUser(data)

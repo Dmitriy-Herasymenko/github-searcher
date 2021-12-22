@@ -1,11 +1,11 @@
 import {FC, useCallback} from "react";
-import {IUserCardAdvance} from "../../types/User";
-import {IRepo} from "../../types/Repo";
+import {IUserCard} from "../../types/userCard";
+import {IRepo} from "../../types/repo";
 import {debounce} from "../../utils";
 import './style.scss';
 
 interface IProps {
-    user: IUserCardAdvance;
+    user: IUserCard;
     fetchRepos: (url: string) => void;
     repos: IRepo[];
 }
@@ -21,7 +21,7 @@ export const UserCard: FC<IProps> = ({user, fetchRepos, repos}) => {
                     <li>{user.name}</li>
                     <li>{user.email}</li>
                     <li>{user.location}</li>
-                    <li>{user.updated_at}</li>
+                    <li>{user.created_at}</li>
                     <li>{user.followers} followers</li>
                     <li>{user.following} following</li>
                     <li className='user-card__description'>{user.bio}</li>
