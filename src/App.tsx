@@ -1,5 +1,5 @@
 import React from 'react';
-import {GithubSearcher} from "./components/githubSearcher";
+import {GithubSearcher} from "./components";
 import './App.scss'
 
 function App() {
