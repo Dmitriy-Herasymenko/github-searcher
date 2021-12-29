@@ -25,6 +25,7 @@ export const UserCard: FC<IProps> = ({user, fetchRepos, repos}) => {
                         <li>{user.created_at}</li>
                         <li>{user.followers} followers</li>
                         <li>{user.following} following</li>
+                        <li>{user.public_repos} public repos</li>
                         <li className='user-card__description'>{user.bio}</li>
                     </ul>
                 </div>
