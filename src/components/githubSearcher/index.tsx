@@ -5,7 +5,7 @@ import axios, {AxiosError} from "axios";
 import './style.scss';
 
 export const GithubSearcher = () => {
-    const [user, setUser] = useState({} as IUserCard);
+    const [user, setUser] = useState<IUserCard>({} as IUserCard);
     const [users, setUsers] = useState<IUser[]>([]);
     const [repos, setRepos] = useState<IRepo[]>([]);
     const [card, isCardSet] = useState(false);
