@@ -1,13 +1,13 @@
 import {FC, useCallback} from "react";
-import {IUserCard} from "../../types/userCard";
-import {IRepo} from "../../types/repo";
+import {Link} from "react-router-dom";
+import {IUserCard, IRepo} from "../../types/";
 import {debounce} from "../../utils";
-import './style.scss';
+import "./style.scss";
 
 interface IProps {
     user: IUserCard;
-    fetchRepos: (url: string) => void;
     repos: IRepo[];
+    fetchRepos: (url: string) => void;
 }
 
 export const UserCard: FC<IProps> = ({user, fetchRepos, repos}) => {
@@ -15,6 +15,7 @@ export const UserCard: FC<IProps> = ({user, fetchRepos, repos}) => {
 
     return (
         <div className='container'>
+            <Link to='/search' className='iconArrow'>&#8592;</Link>
             <div className='user-card'>
                 <img className='user-card__img' src={user.avatar_url} alt=""/>
                 <ul className='user-card__list'>
