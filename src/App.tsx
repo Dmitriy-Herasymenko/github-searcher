@@ -1,13 +1,15 @@
 import React from 'react';
 import {GithubSearcher} from "./components";
+import {BrowserRouter} from "react-router-dom";
 import './App.scss'
 
-function App() {
-  return (
-    <div className="App">
-      <GithubSearcher />
-    </div>
+export const App = () => {
+    return (
+      <BrowserRouter>
+        <div className="App" >
+            <GithubSearcher />
+        </div>
+      </BrowserRouter>
   );
 }
 
-export default App;

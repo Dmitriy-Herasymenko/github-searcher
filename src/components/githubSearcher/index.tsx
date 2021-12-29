@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {UserCard, Search} from "../index";
 import {IUser, IUserList, IUserCard, IRepo} from "../../types/";
 import {
-    BrowserRouter,
     Routes,
     Route,
 } from "react-router-dom";
@@ -10,7 +9,7 @@ import {
 import axios, {AxiosError} from "axios";
 
 export const GithubSearcher = () => {
-    const [user, setUser] = useState<IUserCard>({} as IUserCard);
+    const [user, setUser] = useState({} as IUserCard);
     const [users, setUsers] = useState<IUser[]>([]);
     const [repos, setRepos] = useState<IRepo[]>([]);
 
@@ -24,7 +23,6 @@ export const GithubSearcher = () => {
         }
     };
     const fetchDataUser = async (url: string) => {
-
         try {
             const {data} = await axios.get<IUserCard>(url)
             setUser(data)
@@ -48,13 +46,9 @@ export const GithubSearcher = () => {
     };
 
     return (
-        <BrowserRouter>
-            <React.Fragment>
-                <Routes>
-                    <Route path='/search' element={<Search users={users} fetchRepos={fetchRepos} fetchUsers={fetchUsers} fetchDataUser={fetchDataUser}/>} />
-                    <Route path='/userCard' element={<UserCard user={user} fetchRepos={fetchRepos} repos={repos} />} />
-                </Routes>
-            </React.Fragment>
-        </BrowserRouter>
+        <Routes>
+            <Route path='/' element={<Search users={users} fetchRepos={fetchRepos} fetchUsers={fetchUsers} fetchDataUser={fetchDataUser}/>} />
+            <Route path='/userCard' element={<UserCard user={user} fetchRepos={fetchRepos} repos={repos} />} />
+        </Routes>
     )
 };

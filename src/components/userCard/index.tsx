@@ -14,7 +14,7 @@ export const UserCard: FC<IProps> = ({user, fetchRepos, repos}) => {
     const debounceOnChange = useCallback(debounce(fetchRepos, 1000), []);
     return (
         <>
-            <Link to='/search' className='iconArrow'>&#8592;</Link>
+            <Link to='/' className='iconArrow'>&#8592;</Link>
             <div className='container'>
                 <div className='user-card'>
                     <img className='user-card__img' src={user.avatar_url} alt=""/>
@@ -32,7 +32,7 @@ export const UserCard: FC<IProps> = ({user, fetchRepos, repos}) => {
                 <input placeholder='Search repo...' className='user-card__search'
                        onChange={(e) => debounceOnChange(e.target.value)}/>
 
-                {repos.map((repo) => {
+                {repos && repos.map((repo) => {
                     return (
                         <div className='user-card-repo' key={repo.id}>
                             <span>{repo.name}</span>
