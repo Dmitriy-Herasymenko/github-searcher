@@ -1,23 +1,25 @@
 import {FC, useCallback} from "react";
-import {debounce} from "../../utils";
 import {CardList} from "../cardList";
-import {IUser} from "../../types";
+import {debounce, fetchUsers} from "../../utils";
+import {IRepo, IUser, IUserCard} from "../../types";
 import "./style.scss";
 
 interface IProps {
-    fetchUsers: (url: string) => void;
-    fetchDataUser: (url: string) => void;
-    fetchRepos: (url?: string) => void;
-    users: IUser[],
+    users: IUser[];
+    setUsers: (data: IUser[]) => void;
+    setUser: (data: IUserCard) => void;
+    setRepos: (data: IRepo[]) => void;
 }
 
-export const Search: FC<IProps> = ({fetchUsers, users, fetchDataUser, fetchRepos}) => {
-    const debounceOnChange = useCallback(debounce(fetchUsers, 1000), []);
+export const Search: FC<IProps> = ({users, setUsers, setUser, setRepos}) => {
+    const debounceOnChange = useCallback(
+        debounce( (e:string) => fetchUsers(e, (data:IUser[]) => setUsers(data)), 1000),
+        []);
 
     return (
         <>
             <input onChange={e => debounceOnChange(e.target.value)} placeholder='Search...' className='search'/>
-            <CardList users={users} fetchDataUser={fetchDataUser} fetchRepos={fetchRepos}   />
+            <CardList users={users} setUser={setUser} setRepos={setRepos}/>
         </>
 
     )

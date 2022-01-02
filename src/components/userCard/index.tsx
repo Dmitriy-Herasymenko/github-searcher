@@ -1,17 +1,18 @@
-import {FC, useCallback, useEffect} from "react";
+import {FC, useCallback} from "react";
 import {Link} from "react-router-dom";
+import {debounce, fetchRepos} from "../../utils";
 import {IUserCard, IRepo} from "../../types/";
-import {debounce} from "../../utils";
 import "./style.scss";
 
 interface IProps {
     user: IUserCard;
     repos: IRepo[];
-    fetchRepos: (url: string) => void;
+    setRepos: (data:IRepo[]) => void;
 }
 
-export const UserCard: FC<IProps> = ({user, fetchRepos, repos}) => {
-    const debounceOnChange = useCallback(debounce(fetchRepos, 1000), []);
+export const UserCard: FC<IProps> = ({user, repos, setRepos}) => {
+    const debounceOnChange = useCallback(
+        debounce( (e:string) => fetchRepos(e, data => setRepos(data)), 1000),[]);
     return (
         <>
             <Link to='/' className='iconArrow'>&#8592;</Link>

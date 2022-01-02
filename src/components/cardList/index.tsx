@@ -1,17 +1,20 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
-import {IUser} from "../../types";
+import {fetchDataUser, fetchRepos} from "../../utils";
+import {IRepo, IUser, IUserCard} from "../../types";
 import "./style.scss";
+
 
 interface IProps {
     users: IUser[];
-    fetchDataUser: (url: string) => void;
-    fetchRepos: (url?:string) => void;
+    setUser: (data:IUserCard) => void;
+    setRepos: (data: IRepo[]) => void;
 }
 
-export const CardList: FC<IProps> = ({users, fetchDataUser, fetchRepos}) => {
+export const CardList: FC<IProps> = ({users, setUser, setRepos}) => {
     const areUsersAvailable = users.length === 0 || users.length === undefined || users.length === null;
     if (areUsersAvailable) return <span>No users</span>
+
     return (
         <>
             {users.map((user) => {
@@ -20,8 +23,8 @@ export const CardList: FC<IProps> = ({users, fetchDataUser, fetchRepos}) => {
                         <img src={user.avatar_url} alt="" className="card__img"/>
                         <span>{user.login}</span>
                         <Link className="card__link"  onClick={() => {
-                            fetchDataUser(user.url)
-                            fetchRepos()
+                            fetchDataUser(user.url, data => setUser(data));
+                            fetchRepos("allRepos",data=> setRepos(data));
                         }} to='/userCard'>repositories</Link>
                     </div>
                 )
